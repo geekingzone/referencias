@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+   homeassistant:
+      container_name: homeassistant
+      image: "ghcr.io/home-assistant/home-assistant:stable"
+      environment:
+        - TZ=Europe/Madrid
+      volumes:
+        - ./config:/config
+        - /etc/localtime:/etc/localtime:ro
+        - /dev/ttyACM0:/dev/ttyACM0
+      devices:
+        - /dev/bus/usb/001/080:/dev/bus/usb/001/080
+      restart: unless-stopped
+      privileged: true
+      network_mode: host
